@@ -108,7 +108,7 @@ unlimited`. Algunas pistas son: abran otra terminal distinta y fíjense
 si vuelve al mismo error, fíjense la diferencia entre `ulimit -a`
 antes y después de ejecutar `ulimit -s unlimited`, googleen, etcétera.
   - Al poner  ulimit -s unlimited, se le dice al stack (la memoria para las funciones) que sea ilimitado. 
-El problema era que no le alcanzaba la memoria. La solución es poner en el git las funciones.
+El problema era que no le alcanzaba la memoria.
 - La "solución" anterior, ¿es una solución en el sentido de debugging?
   - No es la solución correcta en el sentido de debugging porque no es independiente del entorno de ejecución.
 - ¿Cómo harían una solución más robusta que la anterior, que no
