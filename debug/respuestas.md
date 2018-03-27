@@ -16,12 +16,21 @@ casos. Algunas cosas que pueden hacer es:
 debug. ¿Tienen toda la información que requerían?
   
   - Primero se compilaron los archivos que están en la carpeta ($ make).
+  
+  &nbsp;
 Para debaguear se utiliza el comando gdb:
+
+  &nbsp;
 $ gdb ./add_array_dynamic.e 
+
+  &nbsp;
 Al hacerlo correr no hubo ningún problema para el archivo add_array_dynamic.e , funcionó sin flags.
 Al debuggear el archivo add_array_segfault.e, dio un error:
+
+  &nbsp;
 Program received signal SIGSEGV, Segmentation fault.
 
+  &nbsp;
 0x00000000004005f2 in main ()
 
 - ¿Qué pasa si ponen el flag de debug? ¿Qué flag de optimización es el
@@ -29,20 +38,54 @@ mejor para debuggear?
 
   - Para debaguear se pone que no optimice el programa. Esto se hace con la opcion gcc -g -O0. 
 A esto lo cambiamos en el makefile. El resultado fue:
+
+  &nbsp;
 Program received signal SIGSEGV, Segmentation fault.
 
+  &nbsp;
 0x00000000004005f2 in main (argc=1, argv=0x7fffffffdd88)
 
+  &nbsp;
     at add_array_segfault.c:19
 
+  &nbsp;
 19	    b[i] = i;
+
+  &nbsp;
 Como se puede ver es un problema de memoria. Para resolverlo hay que hacer un malloc de la variable.
 - Agreguen algún flag para que informe todos los warnings en la
 compilación, como `-Wall`. ¿Alguno les da alguna pista de por qué el
 programa se rompe?
   - Para esto, se cambio en el makefile: 
+  
+  &nbsp;
 CC = gcc 
+
+  &nbsp;
 CFLAGS = -g -O0 -Wall
+
+  &nbsp;
+Y resulto:
+
+  &nbsp;
+(gdb) r
+
+  &nbsp;
+Starting program: /home/janisaseba/Dropbox/documentos/cursos/TecnicasDeProgramacionCientifica/ejercicios/labdia4/HOdebug-profile/debug/bugs/add_array_segfault.e 
+
+  &nbsp;
+Program received signal SIGSEGV, Segmentation fault.
+
+  &nbsp;
+0x00000000004005f2 in main (argc=1, argv=0x7fffffffdd88)
+ at add_array_segfault.c:19
+ 
+   &nbsp;
+19	    b[i] = i;
+
+  &nbsp;
+  El programa se rompe porque no encuentra la memoria para guardar la componente i-ésima del vector __b__.
+
 
 ## Segmentation Fault
 
