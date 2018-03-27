@@ -14,7 +14,8 @@ carpeta ya tiene un `Makefile` hecho, que compila todos los
 casos. Algunas cosas que pueden hacer es:
 - Correr el programa con un debugger, sin agregar flags de
 debug. ¿Tienen toda la información que requerían?
-Primero se compilaron los archivos que están en la carpeta ($ make).
+  
+  - Primero se compilaron los archivos que están en la carpeta ($ make).
 Para debaguear se utiliza el comando gdb:
 $ gdb ./add_array_dynamic.e 
 Al hacerlo correr no hubo ningún problema para el archivo add_array_dynamic.e , funcionó sin flags.
@@ -25,7 +26,8 @@ Program received signal SIGSEGV, Segmentation fault.
 
 - ¿Qué pasa si ponen el flag de debug? ¿Qué flag de optimización es el
 mejor para debuggear?
-Para debaguear se pone que no optimice el programa. Esto se hace con la opcion gcc -g -O0. 
+
+  - Para debaguear se pone que no optimice el programa. Esto se hace con la opcion gcc -g -O0. 
 A esto lo cambiamos en el makefile. El resultado fue:
 Program received signal SIGSEGV, Segmentation fault.
 
@@ -38,7 +40,7 @@ Como se puede ver es un problema de memoria. Para resolverlo hay que hacer un ma
 - Agreguen algún flag para que informe todos los warnings en la
 compilación, como `-Wall`. ¿Alguno les da alguna pista de por qué el
 programa se rompe?
-Para esto, se cambio en el makefile: 
+  - Para esto, se cambio en el makefile: 
 CC = gcc 
 CFLAGS = -g -O0 -Wall
 
@@ -49,25 +51,26 @@ En la carpeta `sigsegv/` hay códigos de C y de FORTRAN con su
 errores que devuelven (¡si devuelven alguno!) los ejecutables.  Ahora
 ejecuten `ulimit -s unlimited` en la terminal y vuelvan a
 correrlo. Luego responder las siguientes preguntas:
-Fui a la carpeta /Hodebug-profile/debug/sigsegv puse make para compilar lo que están en c hice correr los programas generados:
+
+__(Fui a la carpeta /Hodebug-profile/debug/sigsegv puse make para compilar lo que están en c hice correr los programas generados:
 ./big.e 
 Dio:
-Violación de segmento (`core' generado)
-El ./small.e no dio problemas.
+Violación de segmento (core generado)
+El ./small.e no dio problemas.)__
 - ¿Devuelven el mismo error que antes?
-Puse el flag ulimit -s unlimited e hice correr el programa, tardo mucho pero se ejecuto sin error.
+  - Puse el flag ulimit -s unlimited e hice correr el programa, tardo mucho pero se ejecuto sin error.
 
 - Averigüen qué hicieron al ejecutar la sentencia `ulimit -s
 unlimited`. Algunas pistas son: abran otra terminal distinta y fíjense
 si vuelve al mismo error, fíjense la diferencia entre `ulimit -a`
 antes y después de ejecutar `ulimit -s unlimited`, googleen, etcétera.
-Lo que hicimos al poner  ulimit -s unlimited, le decimos que el stack (la memoria para las funciones) sea ilimitado. 
+  - Al poner  ulimit -s unlimited, se le dice al stack (la memoria para las funciones) que sea ilimitado. 
 El problema era que no le alcanzaba la memoria. La solución es poner en el git las funciones.
 - La "solución" anterior, ¿es una solución en el sentido de debugging?
-No es la solución correcta en el sentido de debugging porque no es independiente del entorno de ejecución.
+  - No es la solución correcta en el sentido de debugging porque no es independiente del entorno de ejecución.
 - ¿Cómo harían una solución más robusta que la anterior, que no
 requiera tocar los `ulimits`?
-Lo que habría que hacer es poner la función en el git.
+  - Lo que habría que hacer es poner la función en el git.
 
 ## Floating point exception
 
